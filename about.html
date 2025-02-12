@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me | John Doe</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    /* Three.js Canvas: full-screen, fixed behind content */
+    #three-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* behind all content */
+      pointer-events: none;
+    }
+    /* About content container */
+    .about-container {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    header {
+      text-align: center;
+      padding: 20px 0;
+      color: #333;
+    }
+    main {
+      line-height: 1.6;
+      padding: 0 20px 20px;
+      color: #555;
+    }
+    @media (max-width: 600px) {
+      .about-container {
+        margin: 20px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Three.js Background Container -->
+  <div id="three-container"></div>
+
+  <!-- About Content -->
+  <div class="about-container">
+    <header>
+      <h1>About Me</h1>
+    </header>
+    <main>
+      <p>Hello! I'm John Doe, a passionate software developer with a love for technology and creativity. I enjoy building innovative solutions and exploring new ideas—from cutting‐edge web development to creative 3D visualizations. This page gives you a glimpse into my journey and my passion for both technology and art.</p>
+      <p>When I'm not coding, you'll often find me experimenting with 3D graphics, designing creative projects, or simply enjoying a good book. Thanks for stopping by!</p>
+    </main>
+  </div>
+
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+    // Get the Three.js container element
+    const container = document.getElementById('three-container');
+
+    // Create the scene, camera, and renderer
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000000); // Dark background for contrast
+
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      container.clientWidth / container.clientHeight,
+      0.1,
+      1000
+    );
+    camera.position.z = 50;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+
+    // Adjust renderer and camera on window resize
+    window.addEventListener('resize', () => {
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    });
+
+    // Array to hold all firework particles
+    let particles = [];
+
+    // Gravity to simulate a slight downward acceleration
+    const gravity = new THREE.Vector3(0, -9.8 * 0.5, 0);
+
+    // Utility function: random number between min and max
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    // Functions to create different geometries
+    function createCubeGeometry() {
+      return new THREE.BoxGeometry(0.8, 0.8, 0.8);
+    }
+    function createSphereGeometry() {
+      return new THREE.SphereGeometry(0.5, 12, 12);
+    }
+    function createPyramidGeometry() {
+      // Using a cone geometry with 4 radial segments to mimic a pyramid
+      return new THREE.ConeGeometry(0.6, 0.8, 4);
+    }
+
+    // Array of geometry creator functions for diversity in explosion shapes
+    const geometryCreators = [createCubeGeometry, createSphereGeometry, createPyramidGeometry];
+
+    // Function to spawn a single firework explosion
+    function spawnFirework() {
+      // Determine explosion center at a random position in the upper half of the scene
+      const explosionCenter = new THREE.Vector3(
+        randomInRange(-20, 20),
+        randomInRange(0, 20),
+        randomInRange(-20, 20)
+      );
+      const particleCount = 30; // Number of particles per explosion
+
+      for (let i = 0; i < particleCount; i++) {
+        // Randomly select a geometry for the particle
+        const createGeometry = geometryCreators[Math.floor(Math.random() * geometryCreators.length)];
+        const geometry = createGeometry();
+        // Create a material with a random bright color and enable transparency for fading
+        const material = new THREE.MeshBasicMaterial({
+          color: new THREE.Color(Math.random(), Math.random(), Math.random()),
+          transparent: true,
+          opacity: 1
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.copy(explosionCenter);
+
+        // Compute a random velocity vector (using spherical coordinates)
+        const speed = randomInRange(10, 20);
+        const theta = randomInRange(0, Math.PI * 2);
+        const phi = randomInRange(0, Math.PI);
+        const velocity = new THREE.Vector3(
+          speed * Math.sin(phi) * Math.cos(theta),
+          speed * Math.cos(phi),
+          speed * Math.sin(phi) * Math.sin(theta)
+        );
+
+        // Each particle lives for a random duration (in seconds)
+        const lifetime = randomInRange(1.5, 2.5);
+
+        // Store particle info and add to the scene
+        particles.push({
+          mesh: mesh,
+          velocity: velocity,
+          lifetime: lifetime,
+          maxLifetime: lifetime
+        });
+        scene.add(mesh);
+      }
+    }
+
+    // Spawn a new firework explosion every 3 seconds
+    setInterval(spawnFirework, 3000);
+
+    // Clock for managing time between frames
+    const clock = new THREE.Clock();
+
+    // Animation loop: update particle positions, apply gravity, fade out, and remove expired particles
+    function animate() {
+      requestAnimationFrame(animate);
+      const dt = clock.getDelta();
+
+      // Update each particle
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.lifetime -= dt;
+        if (p.lifetime <= 0) {
+          // Remove the particle from the scene and the array
+          scene.remove(p.mesh);
+          particles.splice(i, 1);
+          continue;
+        }
+        // Update velocity with gravity
+        p.velocity.add(gravity.clone().multiplyScalar(dt));
+        // Update position using the current velocity
+        p.mesh.position.add(p.velocity.clone().multiplyScalar(dt));
+        // Gradually fade out the particle over its lifetime
+        p.mesh.material.opacity = p.lifetime / p.maxLifetime;
+      }
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>
