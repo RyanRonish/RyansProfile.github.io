@@ -1,2 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Blog | John Doe</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    /* Blog Form Styling */
+    .blog-form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .blog-form h2 {
+      margin-bottom: 10px;
+    }
+    .blog-form input[type="text"],
+    .blog-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+    .blog-form button {
+      background: #ff6f61;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .blog-form button:hover {
+      background: #ff8f81;
+    }
+    /* Blog Post Styling */
+    .blog-post {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .blog-post h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .blog-post .date {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .blog-post p {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Page Header -->
+  <header>
+    <h1>My Blog</h1>
+  </header>
 
+  <div class="container">
+    <!-- Blog Post Submission Form -->
+    <div class="blog-form">
+      <h2>Add New Blog Post</h2>
+      <form id="postForm">
+        <input type="text" id="postTitle" placeholder="Enter post title" required />
+        <textarea id="postContent" rows="5" placeholder="Enter post content" required></textarea>
+        <button type="submit">Add Post</button>
+      </form>
+    </div>
 
+    <!-- Container for Blog Posts -->
+    <div id="postsContainer">
+      <!-- A sample pre-existing blog post -->
+      <div class="blog-post">
+        <h2>Welcome to My Blog!</h2>
+        <div class="date">October 1, 2023</div>
+        <p>This is the first post on my blog. Stay tuned for more updates!</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get the form and posts container elements
+    const postForm = document.getElementById('postForm');
+    const postsContainer = document.getElementById('postsContainer');
+
+    // Listen for form submission to add a new blog post
+    postForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Get the values from the form inputs
+      const title = document.getElementById('postTitle').value.trim();
+      const content = document.getElementById('postContent').value.trim();
+
+      // Validate the inputs
+      if (!title || !content) {
+        alert('Please fill out both the title and content.');
+        return;
+      }
+
+      // Create a new blog post element
+      const postElement = document.createElement('div');
+      postElement.classList.add('blog-post');
+
+      // Create and add the title
+      const postTitle = document.createElement('h2');
+      postTitle.textContent = title;
+      postElement.appendChild(postTitle);
+
+      // Create and add the current date
+      const dateElement = document.createElement('div');
+      dateElement.classList.add('date');
+      const currentDate = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      dateElement.textContent = currentDate.toLocaleDateString(undefined, options);
+      postElement.appendChild(dateElement);
+
+      // Create and add the content
+      const postContent = document.createElement('p');
+      postContent.textContent = content;
+      postElement.appendChild(postContent);
+
+      // Insert the new post at the top of the posts container
+      postsContainer.insertBefore(postElement, postsContainer.firstChild);
+
+      // Clear the form for the next post
+      postForm.reset();
+    });
+  </script>
+</body>
+</html>
