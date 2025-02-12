@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Resume</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+    }
+    /* Header Styling */
+    header {
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    /* Container for the timeline */
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    /* Timeline Base */
+    .timeline {
+      position: relative;
+      margin: 40px 0;
+      padding: 20px 0;
+    }
+    /* The vertical line */
+    .timeline::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ddd;
+      transform: translateX(-50%);
+    }
+    /* Individual timeline items */
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      margin-bottom: 40px;
+    }
+    /* Alternate items to left/right */
+    .timeline-item:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+    .timeline-item:nth-child(even) {
+      left: 50%;
+      text-align: left;
+    }
+    /* Timeline circle for each item */
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border: 4px solid #ff6f61;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    /* Position the circles correctly */
+    .timeline-item:nth-child(odd)::before {
+      right: -10px;
+    }
+    .timeline-item:nth-child(even)::before {
+      left: -10px;
+    }
+    /* Content within timeline items */
+    .timeline-item .date {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 5px;
+    }
+    .timeline-item h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .timeline-item p {
+      margin-bottom: 10px;
+    }
+    /* Hover effect to add interactivity */
+    .timeline-item:hover {
+      background: #ff6f61;
+      color: #fff;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+    .timeline-item:hover .date,
+    .timeline-item:hover h3,
+    .timeline-item:hover p {
+      color: #fff;
+    }
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .timeline::after {
+        left: 8px;
+      }
+      .timeline-item {
+        width: 100%;
+        padding-left: 40px;
+        padding-right: 20px;
+        text-align: left;
+        left: 0;
+      }
+      .timeline-item::before {
+        left: 8px;
+        right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Resume</h1>
+  </header>
+  <div class="container">
+    <section class="timeline">
+      <!-- Timeline Item 1: Current Job -->
+      <div class="timeline-item">
+        <div class="date">2023 - Present</div>
+        <h3>Senior Software Engineer at TechCorp</h3>
+        <p>
+          Leading a team of developers to create scalable web applications while refining
+          software architecture and integrating modern technologies.
+        </p>
+      </div>
+      <!-- Timeline Item 2: Previous Job -->
+      <div class="timeline-item">
+        <div class="date">2020 - 2023</div>
+        <h3>Software Engineer at DevSolutions</h3>
+        <p>
+          Developed innovative features for enterprise-level platforms using JavaScript frameworks,
+          and collaborated closely with design teams to enhance user experiences.
+        </p>
+      </div>
+      <!-- Timeline Item 3: Early Career -->
+      <div class="timeline-item">
+        <div class="date">2018 - 2020</div>
+        <h3>Junior Developer at CodeWorks</h3>
+        <p>
+          Assisted in building responsive websites and applications, contributing to code reviews
+          and iterative design improvements.
+        </p>
+      </div>
+      <!-- Timeline Item 4: Education -->
+      <div class="timeline-item">
+        <div class="date">2014 - 2018</div>
+        <h3>Bachelor of Science in Computer Science</h3>
+        <p>
+          Graduated from the University of Northern Colorado with a focus on software engineering,
+          algorithms, and data structures.
+        </p>
+      </div>
+      <!-- Additional timeline items can be added here -->
+    </section>
+  </div>
+</body>
+</html>
