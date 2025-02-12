@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Me | John Doe</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    /* Three.js canvas container placed behind the content */
+    #three-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* behind everything */
+      pointer-events: none; /* do not interfere with UI interactions */
+    }
+    /* Main content container */
+    .contact-container {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 20px 0;
+      color: #fff;
+    }
+    main {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+    main h2 {
+      margin-bottom: 10px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    form input,
+    form textarea {
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+    form button {
+      padding: 10px;
+      background: #ff6f61;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+    form button:hover {
+      background: #ff8f81;
+    }
+    section.contact-details {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    section.contact-details p {
+      margin: 10px 0;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .contact-container {
+        padding: 10px;
+      }
+      main, section.contact-details {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Three.js Canvas (Background) -->
+  <div id="three-container"></div>
+  
+  <!-- Main Contact Content -->
+  <div class="contact-container">
+    <header>
+      <h1>Contact Me</h1>
+    </header>
+    <main>
+      <h2>Get in Touch</h2>
+      <p>Please fill out the form below, and I will get back to you as soon as possible.</p>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </main>
+    <section class="contact-details">
+      <h2>Other Ways to Contact Me</h2>
+      <p>Email: john@example.com</p>
+      <p>Phone: (555) 123-4567</p>
+      <p>Address: 123 Main St, City, Country</p>
+    </section>
+  </div>
+  
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Legacy FontLoader and TextGeometry (non-module versions) -->
+  <script src="https://threejs.org/examples/js/loaders/FontLoader.js"></script>
+  <script src="https://threejs.org/examples/js/geometries/TextGeometry.js"></script>
+  <script>
+    // Get the Three.js container
+    const container = document.getElementById('three-container');
+    
+    // Create the scene, camera, and renderer
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1d1f20); // dark background for contrast
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      container.clientWidth / container.clientHeight,
+      0.1,
+      1000
+    );
+    camera.position.z = 30;
+    
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+    
+    // Adjust renderer and camera on window resize
+    window.addEventListener('resize', () => {
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    });
+    
+    // Array to hold our moving number meshes
+    const movingNumbers = [];
+    const numberCount = 30; // adjust to change the number of floating numbers
+    
+    // Load the font and create the 3D text (numbers)
+    const loader = new THREE.FontLoader();
+    loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+      for (let i = 0; i < numberCount; i++) {
+        // Generate a random number (0 to 99)
+        const numberValue = Math.floor(Math.random() * 100).toString();
+        const textGeometry = new THREE.TextGeometry(numberValue, {
+          font: font,
+          size: 2,
+          height: 0.5,
+          curveSegments: 12,
+          bevelEnabled: false
+        });
+        // Create a semi-transparent material so the numbers are subtle
+        const textMaterial = new THREE.MeshBasicMaterial({
+          color: 0xff6f61,
+          transparent: true,
+          opacity: 0.7
+        });
+        const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+        
+        // Set a random initial position (spread across the scene)
+        textMesh.position.x = (Math.random() - 0.5) * 60;
+        textMesh.position.y = (Math.random() - 0.5) * 40;
+        textMesh.position.z = (Math.random() - 0.5) * 60;
+        
+        // Assign a small random velocity for smooth motion
+        textMesh.userData.velocity = new THREE.Vector3(
+          (Math.random() - 0.5) * 0.1,
+          (Math.random() - 0.5) * 0.1,
+          (Math.random() - 0.5) * 0.1
+        );
+        
+        // Add the mesh to the scene and to our tracking array
+        scene.add(textMesh);
+        movingNumbers.push(textMesh);
+      }
+      
+      // Start the animation loop after the numbers are added
+      animate();
+    });
+    
+    // Animation loop to move the numbers continuously
+    function animate() {
+      requestAnimationFrame(animate);
+      
+      movingNumbers.forEach(mesh => {
+        // Update position based on velocity
+        mesh.position.add(mesh.userData.velocity);
+        
+        // Wrap the numbers around if they go out of bounds
+        if (mesh.position.x > 30) mesh.position.x = -30;
+        if (mesh.position.x < -30) mesh.position.x = 30;
+        if (mesh.position.y > 20) mesh.position.y = -20;
+        if (mesh.position.y < -20) mesh.position.y = 20;
+        if (mesh.position.z > 30) mesh.position.z = -30;
+        if (mesh.position.z < -30) mesh.position.z = 30;
+        
+        // Apply a slow rotation for an extra dynamic effect
+        mesh.rotation.x += 0.005;
+        mesh.rotation.y += 0.005;
+      });
+      
+      renderer.render(scene, camera);
+    }
+  </script>
+</body>
+</html>
