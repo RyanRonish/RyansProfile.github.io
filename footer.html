@@ -1,3 +1,80 @@
+<style>
+
+    /* Footer Styles */
+.site-footer {
+    background-color: #007bff; /* Bright blue background */
+    color: #fff;
+    padding: 40px 20px;
+    }
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    justify-content: space-between;
+    gap: 20px; /* Spacing between columns */
+    }
+
+    /* Branding Column */
+.footer-brand {
+    flex: 1 1 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    }
+.footer-logo {
+    max-width: 150px;
+    margin-bottom: 10px;
+    }
+
+    /* Footer Column Layout */
+.footer-column {
+    flex: 1 1 200px; /* Each column will try to be at least 200px wide */
+    min-width: 150px;
+    }
+
+.footer-column h4 {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    }
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    }
+
+.footer-column li {
+    margin-bottom: 10px;
+    }
+
+.footer-column a {
+    color: #fff;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+    }
+
+.footer-column a:hover {
+    opacity: 0.8;
+    }
+
+    /* Social Icons (if using Font Awesome or similar) */
+.social-list i {
+    margin-right: 8px;
+    }
+
+    /* Responsive Adjustments */
+@media (max-width: 768px) {
+    .footer-brand {
+        margin-bottom: 30px;
+    }
+    .footer-column {
+        flex: 1 1 100%;
+        margin-bottom: 20px;
+    }
+    }
+</style>
+
 <!-- Footer Section -->
 <footer class="site-footer">
     <div class="footer-container">
