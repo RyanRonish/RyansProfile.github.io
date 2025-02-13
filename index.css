@@ -1,0 +1,193 @@
+
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    color: #333;
+  }
+  header {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Layout container */
+  .container {
+    display: flex;
+    flex-direction: row;
+    height: calc(100% - 80px); /* adjust based on header height */
+  }
+  
+  /* 3D design section */
+  .three-container {
+    flex: 1;
+    position: relative;
+    /* Ensures the Three.js canvas fills the container */
+    overflow: hidden;
+  }
+  
+  /* Profile details section */
+  .profile-details {
+    flex: 1;
+    padding: 40px;
+    background: #fff;
+    overflow-y: auto;
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media screen and (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    .three-container,
+    .profile-details {
+      height: 50%;
+    }
+  }
+  
+      /* Navbar Styles */
+      nav {
+    background-color: #444;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s;
+  }
+  nav ul li a:hover {
+    background-color: #555;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    nav ul {
+      flex-direction: column;
+    }
+    nav ul li a {
+      text-align: center;
+    }
+  }
+  
+  /* Sample main content styling */
+  main {
+    padding: 20px;
+  }
+  
+  /* Skills and tech esp section. */
+      .skills-section,
+  .technical-expertise {
+  margin-bottom: 30px;
+  padding: 0 20px;
+  }
+  
+  .skills-section h3,
+  .technical-expertise h3 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1.5rem;
+  }
+  
+  .skills-section ul,
+  .technical-expertise ul {
+  list-style: disc inside;
+  line-height: 1.8;
+  }
+  
+  .skills-section li,
+  .technical-expertise li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #555;
+  }
+  
+  /* Footer Styles */
+  .site-footer {
+      background-color: #007bff; /* Bright blue background */
+      color: #fff;
+      padding: 40px 20px;
+      }
+  
+  .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap; /* Allows wrapping on smaller screens */
+      justify-content: space-between;
+      gap: 20px; /* Spacing between columns */
+      }
+  
+      /* Branding Column */
+  .footer-brand {
+      flex: 1 1 100%;
+      text-align: center;
+      margin-bottom: 20px;
+      }
+  .footer-logo {
+      max-width: 150px;
+      margin-bottom: 10px;
+      }
+  
+      /* Footer Column Layout */
+  .footer-column {
+      flex: 1 1 200px; /* Each column will try to be at least 200px wide */
+      min-width: 150px;
+      }
+  
+  .footer-column h4 {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      }
+  
+  .footer-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      }
+  
+  .footer-column li {
+      margin-bottom: 10px;
+      }
+  
+  .footer-column a {
+      color: #fff;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+      }
+  
+  .footer-column a:hover {
+      opacity: 0.8;
+      }
+  
+      /* Social Icons (if using Font Awesome or similar) */
+  .social-list i {
+      margin-right: 8px;
+      }
+  
+      /* Responsive Adjustments */
+  @media (max-width: 768px) {
+      .footer-brand {
+          margin-bottom: 30px;
+      }
+      .footer-column {
+          flex: 1 1 100%;
+          margin-bottom: 20px;
+      }
+      }
