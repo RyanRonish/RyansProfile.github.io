@@ -115,6 +115,12 @@
     main {
       padding: 20px;
     }
+
+    /*for the dropdown with images */
+    .dropdown-details {
+      transition: max-height 0.3s ease-out;
+      overflow: hidden;
+    }
   </style>
 </head>
 <body>
@@ -160,7 +166,12 @@
           Implemented functionality for users to scan barcodes or manually input book details for seamless organization.
           Utilizing Swift, SwiftUI, and Firebase to build a responsive, cloud-backed platform with real-time data synchronization.
         </p>
-        <a href="#">View Details</a>
+        <a href="#" class="toggle-details">View Details</a>
+          <!-- Hidden container for images -->
+        <div class="dropdown-details" style="display: none;">
+          <img src="images/portfolio1.jpg" alt="Portfolio Screenshot 1" />
+          <img src="images/portfolio2.jpg" alt="Portfolio Screenshot 2" />
+        </div>
       </div>
       <!-- Project Card 3 -->
       <div class="project-card">
@@ -171,7 +182,13 @@
           Implemented a dynamic reservation interface with real-time status updates (green for available, red for reserved).
           Built using Python, Django, JavaScript, HTML, CSS, Bootstrap, and PostgreSQL, integrating backend logic with a responsive UI.
         </p>
-        <a href="#">View Details</a>
+        <a href="#" class="toggle-details">View Details</a>
+                  <!-- Hidden container for images -->
+                  <div class="dropdown-details" style="display: none;">
+                    <img src="images/portfolio1.jpg" alt="Portfolio Screenshot 1" />
+                    <img src="images/portfolio2.jpg" alt="Portfolio Screenshot 2" />
+                  </div>
+                </div>
       </div>
       <!-- Additional project cards can be added here -->
     </div>
@@ -263,6 +280,24 @@
           document.getElementById('footer-container').innerHTML = data;
         })
         .catch(error => console.error('Error loading footer:', error));
+    </script>
+<!-- script for the dropdown menu -->
+    <script>
+      document.querySelectorAll('.toggle-details').forEach(link => {
+        link.addEventListener('click', function(event) {
+          event.preventDefault(); // Prevent the default anchor behavior
+          const detailsContainer = this.nextElementSibling;
+          
+          // Toggle the container's display state
+          if (detailsContainer.style.display === "none" || detailsContainer.style.display === "") {
+            detailsContainer.style.display = "block";
+            this.textContent = "Hide Details"; // Optional: change the link text
+          } else {
+            detailsContainer.style.display = "none";
+            this.textContent = "View Details";
+          }
+        });
+      });
     </script>
 </body>
 </html>
