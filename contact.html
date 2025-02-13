@@ -93,6 +93,44 @@
         padding: 15px;
       }
     }
+
+            /* Navbar Styles */
+            nav {
+      background-color: #444;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    /*nav ul li {
+       No margin needed if spacing is handled via the anchor padding 
+    } */
+    nav ul li a {
+      display: block;
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+    nav ul li a:hover {
+      background-color: #555;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+      }
+      nav ul li a {
+        text-align: center;
+      }
+    }
+
+    /* Sample main content styling */
+    main {
+      padding: 20px;
+    }
   </style>
 </head>
 <body>
@@ -104,6 +142,18 @@
     <header>
       <h1>Contact Me</h1>
     </header>
+
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
     <main>
       <h2>Get in Touch</h2>
       <p>Please fill out the form below, and I will get back to you as soon as possible.</p>
