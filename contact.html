@@ -221,7 +221,7 @@
     loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
       for (let i = 0; i < numberCount; i++) {
         // Generate a random number (0 to 99)
-        const numberValue = Math.floor(Math.random() * 100).toString();
+        const numberValue = Math.floor(Math.random() * 1000).toString();
         const textGeometry = new THREE.TextGeometry(numberValue, {
           font: font,
           size: 2,
