@@ -160,6 +160,54 @@
     main {
       padding: 20px;
     }
+
+    /* download button */
+    .download-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff6f61;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background-color: #e65b50;
+    }
+
+    /* Secondary Navbar Styling */
+    .section-nav {
+      background-color: #666;
+      padding: 10px 0;
+    }
+
+    .section-nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0;
+      padding: 0;
+    }
+
+    .section-nav ul li {
+      margin: 0 10px;
+    }
+
+    .section-nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .section-nav ul li a:hover {
+      background-color: #555;
+      border-radius: 3px;
+    }
+
+
   </style>
 </head>
 <body>
@@ -179,9 +227,29 @@
         </ul>
       </nav>
 
+      <!-- Download button for pdf version of my resume -->
+      <div class="download-container" style="text-align: center; margin: 20px 0;">
+        <a href="resume.pdf" download class="download-btn">Download My Resume</a>
+      </div>
+
+      <!-- Secondary Navbar for Resume Sections -->
+      <nav class="section-nav">
+        <ul>
+          <li><a href="#unco-student-treasurer">UNCO Student Treasurer</a></li>
+          <li><a href="#salesman-shipment-manager">Salesman/Shipment Manager</a></li>
+          <li><a href="#junior-class-senator">Junior Class Senator</a></li>
+          <li><a href="#sales-associate">Sales Associate</a></li>
+          <li><a href="#unco-student-senator">UNCO Student Senator</a></li>
+          <li><a href="#bachelor">Bachelor's in Software Engineering</a></li>
+          <li><a href="#manager">Manager - Jimmy John's</a></li>
+          <li><a href="#high-school">High School Diploma</a></li>
+        </ul>
+      </nav>
+
+
       <div class="container">
         <section class="timeline">
-          <div class="timeline-item">
+          <div class="timeline-item" id="unco-student-treasurer">
             <div class="date">May 2024 - Present</div>
             <h3>UNCO Student Treasurer</h3>
             <p>Oversaw a $250,000 budget for UNC’s Student Government, ensuring compliance with all student fee regulations.</p>
@@ -190,7 +258,7 @@
             <p>Ensured fiscal responsibility by adhering to university policies for student fee expenditures.</p>
             <p>Developed and launched the Senator Sponsorship Program, fostering greater engagement between student government and the student body.</p>
           </div>
-          <div class="timeline-item">
+          <div class="timeline-item" id="salesman-shipment-manager">
             <div class="date">June 2024 - Present</div>
             <h3>Salesman/Shipment Manager - Bath and Body Works</h3>
             <p>Delivered exceptional customer service by addressing all customer needs and enhancing shopping experience.</p>
@@ -198,14 +266,14 @@
             <p>Promoted to Shipment Manager within a few months, recognizing strong performance and leadership.</p>
             <p>Introduced new shipment processing methods, improving efficiency and streamlining operations.</p>
           </div>
-          <div class="timeline-item">
+          <div class="timeline-item" id="junior-class-senator">
             <div class="date">Aug 2023 - May 2024</div>
             <h3>UNCO Junior Class Senator</h3>
             <p>Elected to represent the entire Junior class, advocating for academic and student life improvements.</p>
             <p>Served on the election and finance committees, overseeing budgeting and student representation processes.</p>
             <p>Contributed to UNCO’s website redesign committee, ensuring improved accessibility and user experience for students.</p>
           </div>
-          <div class="timeline-item">
+          <div class="timeline-item" id="sales-associate">
             <div class="date">July 2023 - April 2024</div>
             <h3>Sales Associate - Best Buy</h3>
             <p>Maintained detailed customer records and purchase history to enhance personalized service and sales tracking.</p>
@@ -213,27 +281,27 @@
             <p>Optimized store displays and merchandise layout to enhance the shopping experience and maximize sales opportunities.</p>
             <p>Provided expert product knowledge and resolved customer concerns, ensuring a seamless and positive shopping experience.</p>
           </div>
-          <div class="timeline-item">
+          <div class="timeline-item" id="unco-student-senator">
             <div class="date">Aug 2022 - Dec 2022</div>
             <h3>UNCO Student Senator</h3>
             <p>Represented Monfort College of Business students and influenced university policy.</p>
             <p>Engaged with university leadership to address student concerns, enhancing transparency and communication.</p>
             <p>Attended and voted in legislative meetings to influence university policies and initiatives.</p>
           </div>
-          <div class="timeline-item">
+          <div class="timeline-item" id="bachelor">
             <div class="date">Expected May 2025</div>
             <h3>Bachelor of Science in Software Engineering</h3>
             <p>University of Northern Colorado – Monfort College of Business.</p>
             <p>Mortar Board | Student Government Association | Delta Sigma Phi</p>
           </div>
-          <div class="timeline-item">
+          <div class="timeline-item" id="manager">
             <div class="date">May 2021 - Dec 2021</div>
             <h3>Manager - Jimmy John's</h3>
             <p>Promoted to manager within a month, leading a team and ensuring operational efficiency.</p>
             <p>Supervised and trained a team of five employees, with one advancing to a managerial role.</p>
             <p>Enhanced customer satisfaction by ensuring efficient service, resolving issues, and maintaining high-quality standards.</p>
           </div>
-          <div class="timeline-item">
+          <div class="timeline-item" id="high-school">
             <div class="date">June 2021</div>
             <h3>High School Diploma</h3>
             <p>Eaglecrest High School, Centennial, CO - GPA: 3.8.</p>
