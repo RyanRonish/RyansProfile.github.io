@@ -48,15 +48,19 @@
       padding: 0 20px 20px;
       color: #555;
     }
+    main p {
+      text-indent: 2em; /* Start paragraphs with a tab-like indent */
+      margin-bottom: 20px;
+      font-size: 1rem;
+    }
     @media (max-width: 600px) {
       .about-container {
         margin: 20px;
         padding: 15px;
       }
     }
-
-            /* Navbar Styles */
-            nav {
+    /* Navbar Styles */
+    nav {
       background-color: #444;
     }
     nav ul {
@@ -64,12 +68,6 @@
       display: flex;
       justify-content: center;
     }
-
-    /*nav ul li {
-       No margin needed if spacing is handled via the anchor padding 
-    }
-    */
-    
     nav ul li a {
       display: block;
       padding: 15px 20px;
@@ -80,8 +78,7 @@
     nav ul li a:hover {
       background-color: #555;
     }
-
-    /* Responsive adjustments */
+    /* Responsive adjustments for Navbar */
     @media (max-width: 768px) {
       nav ul {
         flex-direction: column;
@@ -89,11 +86,6 @@
       nav ul li a {
         text-align: center;
       }
-    }
-
-    /* Sample main content styling */
-    main {
-      padding: 20px;
     }
   </style>
 </head>
@@ -107,36 +99,30 @@
       <h1>About Me</h1>
     </header>
 
-      <!-- Navbar -->
-  <nav>
-    <ul>
-      <li><a href="resume.html">Resume</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
+    <!-- Navbar -->
+    <nav>
+      <ul>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
 
     <main>
-     <p><pre>I’m Ryan Ronish, a Software Engineering student at the University of Northern Colorado, with a passion for technology, leadership, and financial management. 
-      I thrive at the intersection of software development, business strategy, and problem solving. I am always looking for ways to innovate and optimize processes. </pre></p>
-
-     </br>
-
-      <p><pre>I am proficient in Java, C#, Python, Swift, Javascript, SQL and more, with experience in frameworks like Django and SwiftUI. 
-      I enjoy building software solutions, from web applications to mobile apps, as well as problem solving and developing creative solutions to everyday problems. </pre></p>
-
-    </br>
-      
-      <p><pre>I’ve held roles in sales, management, and operations, quickly earning promotions and implementing efficiency improvements. 
-      At Bath & Body Works, I optimized shipment processes as a shipment manager, and as the University of Northern Colorado's Student Treasurer, 
-      I manage a $250,000 student government budget and oversee financial allocations, including the I-tech Fund. I’ve introduced new financial programs to improve funding accessibility and transparency. </pre> </p>
-
-    </br>
-      
-      <p><pre>I’m motivated by continuous learning, leadership, and making a tangible impact—whether it’s through software development, financial management, or driving organizational change. 
-      I’m always open to networking and discussing tech, business, and leadership opportunities! </pre></p>
+      <p>
+        I’m Ryan Ronish, a Software Engineering student at the University of Northern Colorado, with a passion for technology, leadership, and financial management. I thrive at the intersection of software development, business strategy, and problem solving. I am always looking for ways to innovate and optimize processes.
+      </p>
+      <p>
+        I am proficient in Java, C#, Python, Swift, Javascript, SQL and more, with experience in frameworks like Django and SwiftUI. I enjoy building software solutions, from web applications to mobile apps, as well as problem solving and developing creative solutions to everyday problems.
+      </p>
+      <p>
+        I’ve held roles in sales, management, and operations, quickly earning promotions and implementing efficiency improvements. At Bath & Body Works, I optimized shipment processes as a shipment manager, and as the University of Northern Colorado's Student Treasurer, I manage a $250,000 student government budget and oversee financial allocations, including the I-tech Fund. I’ve introduced new financial programs to improve funding accessibility and transparency.
+      </p>
+      <p>
+        I’m motivated by continuous learning, leadership, and making a tangible impact—whether it’s through software development, financial management, or driving organizational change. I’m always open to networking and discussing tech, business, and leadership opportunities!
+      </p>
     </main>
   </div>
 
@@ -211,11 +197,13 @@
         // Randomly select a geometry for the particle
         const createGeometry = geometryCreators[Math.floor(Math.random() * geometryCreators.length)];
         const geometry = createGeometry();
-        // Create a material with a random bright color and enable transparency for fading
+        // Create a material with a random bright color using additive blending for extra glow
         const material = new THREE.MeshBasicMaterial({
           color: new THREE.Color(Math.random(), Math.random(), Math.random()),
           transparent: true,
-          opacity: 1
+          opacity: 1,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
         });
         const mesh = new THREE.Mesh(geometry, material);
         mesh.position.copy(explosionCenter);
