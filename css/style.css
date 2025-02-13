@@ -1,4 +1,123 @@
 
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  color: #333;
+}
+header {
+  background: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Layout container */
+.container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - 80px); /* adjust based on header height */
+}
+
+/* 3D design section */
+.three-container {
+  flex: 1;
+  position: relative;
+  /* Ensures the Three.js canvas fills the container */
+  overflow: hidden;
+}
+
+/* Profile details section */
+.profile-details {
+  flex: 1;
+  padding: 40px;
+  background: #fff;
+  overflow-y: auto;
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+  .three-container,
+  .profile-details {
+    height: 50%;
+  }
+}
+
+    /* Navbar Styles */
+    nav {
+  background-color: #444;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+nav ul li a:hover {
+  background-color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+  }
+  nav ul li a {
+    text-align: center;
+  }
+}
+
+/* Sample main content styling */
+main {
+  padding: 20px;
+}
+
+/* Skills and tech esp section. */
+    .skills-section,
+.technical-expertise {
+margin-bottom: 30px;
+padding: 0 20px;
+}
+
+.skills-section h3,
+.technical-expertise h3 {
+margin-bottom: 10px;
+color: #333;
+font-size: 1.5rem;
+}
+
+.skills-section ul,
+.technical-expertise ul {
+list-style: disc inside;
+line-height: 1.8;
+}
+
+.skills-section li,
+.technical-expertise li {
+margin-bottom: 8px;
+font-size: 1rem;
+color: #555;
+}
+
 /* Footer Styles */
 .site-footer {
     background-color: #007bff; /* Bright blue background */
